@@ -11,13 +11,10 @@ import java.lang.reflect.Type;
 
 @Slf4j
 public class MySessionHandler extends StompSessionHandlerAdapter {
-
     @Override
     public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
-        session.send("/app/hello", "{\"name\":\"Client\"}".getBytes());
-        session.setAutoReceipt(true);
-
         session.subscribe("/topic/greetings", this);
+        session.send("/app/hello", "{\"name\":\"Client\"}".getBytes());
 
         log.info("New session: {}", session.getSessionId());
     }

@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class ServiceClient {
     public static void main(String... argv) {
         WebSocketClient webSocketClient = new StandardWebSocketClient();
-        final WebSocketStompClient stompClient = new WebSocketStompClient(webSocketClient);
+        WebSocketStompClient stompClient = new WebSocketStompClient(webSocketClient);
         stompClient.setMessageConverter(new MappingJackson2MessageConverter());
         stompClient.setTaskScheduler(new ConcurrentTaskScheduler());
 
@@ -20,6 +20,6 @@ public class ServiceClient {
         StompSessionHandler sessionHandler = new MySessionHandler();
         stompClient.connect(url, sessionHandler);
 
-        new Scanner(System.in).nextLine();
+        new Scanner(System.in).nextLine(); //Don't close immediately.
     }
 }
